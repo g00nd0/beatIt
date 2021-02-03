@@ -62,7 +62,8 @@ const initialStepState = {
   OpenHiHat: [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0],
 };
 
-export default function DrumMachine() {
+// export default function DrumMachine() {
+const DrumMachine = () => {
   const [stepState, setSteps] = useState(initialStepState);
   const [buffers, setBuffers] = useState({});
   const [currentStep, setCurrentStepState] = useState(0);
@@ -79,7 +80,7 @@ export default function DrumMachine() {
 
   useEffect(
     () => {
-      Tone.Transport.scheduleRepeat(function(time) {
+      Tone.Transport.scheduleRepeat(function (time) {
         Object.keys(buffersRef.current).forEach(b => {
           let targetStep = stepsRef.current[b][currentStepRef.current];
           let targetBuffer = buffersRef.current[b];
@@ -98,7 +99,8 @@ export default function DrumMachine() {
         });
       }, '16n');
     },
-    [config]
+    []
+    //  [config]
   );
 
   useEffect(
@@ -146,3 +148,5 @@ export default function DrumMachine() {
     </StepContext.Provider>
   );
 }
+
+export default DrumMachine

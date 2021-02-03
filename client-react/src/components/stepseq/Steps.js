@@ -11,9 +11,9 @@ const Wrapper = styled.div`
 
 export default function Steps(props) {
   const context = useContext(StepContext);
-  const steps = useMemo(() => context.state[props.name], [
-    context.state[props.name],
-  ]);
+  const contextMemo = context.state[props.name];
+  // const steps = useMemo(() => context.state[props.name], [context.state[props.name]]);
+  const steps = useMemo(() => contextMemo, [contextMemo]);
 
   return (
     <Wrapper>
