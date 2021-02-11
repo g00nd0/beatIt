@@ -19,14 +19,14 @@ const NavBar = ({ user }) => {// {userId, userName}
     >
       <Navbar.Brand as={Link} to="/">
         <img
-          src="/logo.svg"
+          src="/drums.png"
           width="30"
           height="30"
           className="d-inline-block align-top"
           alt=""
         />{" "}
-        BeatIT!
-      </Navbar.Brand>
+BeatIT!
+</Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
       {/* <Navbar.Collapse id="basic-navbar-nav"> */}
       <Nav className="mr-auto" id="navBar-left">
