@@ -2,6 +2,9 @@
   "name": "client-react",
   "version": "0.1.0",
   "private": true,
+  "alias": {
+    "react-cache": "./vendor/react-cache/index"
+  },
   "dependencies": {
     "@material-ui/core": "^4.11.3",
     "@material-ui/icons": "^4.11.2",
@@ -13,10 +16,9 @@
     "jsonwebtoken": "^8.5.1",
     "now": "^12.1.5",
     "prettier": "^2.2.1",
-    "react": "^17.0.1",
+    "react": "^16.7.x",
     "react-bootstrap": "^1.4.3",
-    "react-cache": "^2.0.0-alpha.1",
-    "react-dom": "^17.0.1",
+    "react-dom": "^16.7.x",
     "react-router-dom": "^5.2.0",
     "react-scripts": "4.0.1",
     "styled-components": "^4.1.1",
