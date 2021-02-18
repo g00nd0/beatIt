@@ -1,4 +1,5 @@
 import AccountDetailsForm from "./AccountDetailsForm";
+import React from "react";
 import "../../css/accountform.css";
 
 const SignUp = (props) => {

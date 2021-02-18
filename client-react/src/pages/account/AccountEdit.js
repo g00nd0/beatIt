@@ -1,4 +1,5 @@
 import AccountDetailsForm from "./AccountDetailsForm";
+import React from "react";
 import { useParams, Redirect } from "react-router-dom";
 const jwt = require("jsonwebtoken");
 
