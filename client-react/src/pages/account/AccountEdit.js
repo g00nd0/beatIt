@@ -14,8 +14,9 @@ const AccountEdit = () => {
     return (
         <>
             {user.userId === userIdParam ? (
-                <div className="edit">
-                    <div style={{ margin: "10px 0 5px 30px" }}>
+                <div className="form-box">
+
+                    <div class="form-h1">
                         <h1>Edit account</h1>
                     </div>
 

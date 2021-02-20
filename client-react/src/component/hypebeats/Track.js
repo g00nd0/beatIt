@@ -51,11 +51,13 @@ export default function Track({ buffer, name, setBuffers }) {
       <Info>
         <Name>
           {name}
+          {"    "}
           <VolumeUp
             onClick={() => {
               buffer.start();
             }}
           />
+          {"   "}
           <Backspace
             onClick={() => {
               clearRow();

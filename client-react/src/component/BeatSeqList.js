@@ -43,8 +43,8 @@ const BeatSeqList = (props) => {
     }, [props.newMachineCreated, props.nameChange, props.saved, refreshList]); //should also render everytime change name, save, new machine, deleted a card
 
     const noList = ( //inform no list, start by clicking add button
-        <div>
-            <p class="p-2">
+        <div class="p-4">
+            <p class="">
                 You don't have a playlist, start one by clicking the add button below
       </p>
         </div>

@@ -10,9 +10,19 @@ const BeatSeqOneCard = (props) => {
 
     const history = useHistory();
 
+    const newDate = new Date(bsUpdatedAt)
+    const corrMonth = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    const year = newDate.getFullYear()
+    const month = corrMonth[newDate.getMonth()]
+    const date = newDate.getDate()
+    const hour = newDate.getHours()
+    const min = newDate.getMinutes()
+    const formattedTime = date + "-" + month + "-" + year + ", " + hour + ":" + min
+    console.log("formattedTiem", formattedTime)
+
     const handleSelectBeatSeqClick = (e, bsId) => {
         e.stopPropagation();
-        console.log("selected a beatSeq", bsId)
+        console.log("selected a beatSeq", bsId);
     }
 
     const handleDeleteBeatSeqClick = (e) => {
@@ -34,9 +44,9 @@ const BeatSeqOneCard = (props) => {
     }
 
     return (
-        <div id="beatseqonecard" class="row no-gutters">
+        <div id="beatseqonecard" class="row no-gutters d-flex justify-content-around">
             {/* beatseqonecard */}
-            <div class="col-10 py-1" id="onecard-cont">
+            <div class="py-1" id="onecard-cont">
 
                 <div class="d-flex card-block" id="onecardcard">
                     <div class="" id="cardtext-wrap">
@@ -45,7 +55,7 @@ const BeatSeqOneCard = (props) => {
                             onClick={(e) => handleSelectBeatSeqClick(e, bsId)}>
                             <h6 class="card-title">{bsName}</h6>
                             <p class="card-text">
-                                Last saved: {bsUpdatedAt}
+                                Last saved: {formattedTime}
                             </p>
                         </ Link>
                     </div>
@@ -53,14 +63,16 @@ const BeatSeqOneCard = (props) => {
                 </div>
             </div>
 
-            <div class="col-2 d-flex" id="deletebtn">
+            <div class="d-flex align-items-center" id="deletebtn">
                 {/* button class="btn btn-info p-1 font-weight-bold w-100" */}
-                <button class="btn p-1 font-weight-bold w-100"
-                    id=""
-                    onClick={(e) => handleDeleteBeatSeqClick(e, bsId)}
-                >
-                    <Delete />
-                </button>
+                <div>
+                    <button class="btn btn-dark p-1 font-weight-bold w-100"
+                        id=""
+                        onClick={(e) => handleDeleteBeatSeqClick(e, bsId)}
+                    >
+                        <Delete />
+                    </button>
+                </div>
             </div>
 
         </div>

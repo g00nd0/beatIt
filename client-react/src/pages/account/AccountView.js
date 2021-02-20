@@ -1,7 +1,8 @@
 import { useState, useEffect } from "react";
 import { Link, Redirect, useParams } from "react-router-dom";
 import axios from "axios";
-import { Row, Col, Container, Button } from "react-bootstrap";
+// import { Row, Col, Container, Button } from "react-bootstrap";
+import { Form, Button, Container, FormLabel, FormControl, FormGroup, FormText, FormCheck, Row, Col, Alert } from "react-bootstrap";
 // import "bootstrap/dist/css/bootstrap.min.css";
 const jwt = require("jsonwebtoken");
 
@@ -33,103 +34,91 @@ const AccountView = () => {//user={userId, username}
             });
     }, [userIdParam]);
 
+    const buffer = 2;
     const keyWidth = 2;
-    const valueWidth = 5;
+    const valueWidth = 6;
 
     return (
         <div>
             {user.userId === userIdParam ? ( //prevent people from manipulating with userId in params
-                <div className="accForm">
-                    <div id="accountdetail-form">
-                        <Row style={{ margin: "10px 0 2px 2px" }}>
-                            <h2>Account Details</h2>
-                        </Row>
-                        <Container style={{ margin: "5px" }}>
-                            <Row style={{ height: "50px" }}>
-                                <Col sm={keyWidth}>
-                                    <span class="font-weight-bold">Username:</span>{" "}
-                                </Col>
-                                <Col sm={valueWidth}>{formData.username}</Col>
-                            </Row>
-                            <Row style={{ height: "50px" }}>
-                                <Col sm={keyWidth}>
-                                    <span class="font-weight-bold">Password:</span>{" "}
-                                </Col>
-                                <Col sm={valueWidth}>xxxxxx</Col>
-                                <Col sm={2}>
-                                    <div className="rightLink">
-                                        <Link to={`/user/${user.userId}/changepassword`}>
+                <div className="form-box">
+                    <div class="form-h1">
+                        <h1>Account Details</h1>
+                    </div>
+                    <div class="detailform-cont">
+
+                        <FormGroup as={Row} controlId="username">
+                            <Col sm={buffer} />
+                            <FormLabel column sm={keyWidth}><span class="font-weight-bold">Username : </span> </FormLabel>
+                            <Col sm={valueWidth}>
+
+                                <p style={{ padding: "7px 15px" }}>{formData.username}</p>
+
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup as={Row} controlId="name">
+                            <Col sm={buffer} />
+                            <FormLabel column sm={keyWidth}><span class="font-weight-bold">Name : </span></FormLabel>
+                            <Col sm={valueWidth}>
+                                <FormControl type="text"
+                                    value={formData.name}
+                                    disabled={true}
+                                />
+                            </Col>
+                        </FormGroup>
+
+                        <FormGroup as={Row} controlId="email">
+                            <Col sm={buffer} />
+                            <FormLabel column sm={keyWidth}><span class="font-weight-bold">Email : </span> </FormLabel>
+                            <Col sm={valueWidth}>
+                                <FormControl type="email"
+                                    value={formData.email}
+                                    disabled={true}
+                                />
+                            </Col>
+                        </FormGroup>
+
+                        <div id="" class="pt-1">
+                            <Row>
+                                <Col sm={buffer + keyWidth} />
+                                <Col sm={valueWidth}>
+                                    <div className="rightLink" class="d-flex flex-row">
+                                        <Link to={`/user/${user.userId}/edit`}>
                                             <Button
-                                                variant="outline-warning"
+                                                variant="primary"
                                                 style={{
                                                     borderRadius: "10px",
                                                     padding: "6px",
                                                     width: "150px",
-                                                    marginTop: "10px",
-                                                    border: "3px solid",
+                                                    // border: "2px solid",
                                                     fontWeight: "bold",
+                                                    margin: "5px",
                                                 }}
                                             >
-                                                Change
+                                                Edit Profile
                 </Button>
+                                        </Link>
+                                        <Link to={`/user/${user.userId}/delete`}>
+                                            <Button
+                                                variant="danger"
+                                                style={{
+                                                    borderRadius: "10px",
+                                                    padding: "6px",
+                                                    width: "150px",
+                                                    // border: "2px solid red",
+                                                    margin: "5px",
+                                                }}
+                                            >
+                                                Delete Account
+                                </Button>
                                         </Link>
                                     </div>
                                 </Col>
                             </Row>
-                            <Row style={{ height: "50px" }}>
-                                <Col sm={keyWidth}>
-                                    <span class="font-weight-bold">Name:</span>{" "}
-                                </Col>
-                                <Col sm={valueWidth}>{formData.name}</Col>
-                            </Row>
-
-                            <Row style={{ height: "50px" }}>
-                                <Col sm={keyWidth}>
-                                    <span class="font-weight-bold">Email:</span>{" "}
-                                </Col>
-                                <Col sm={valueWidth}>{formData.email}</Col>
-                            </Row>
-                        </Container>
-                    </div>
-
-                    <div id="accountDetail-buttonRow">
-                        <div className="rightLink">
-                            <Link to={`/user/${user.userId}/edit`}>
-                                <Button
-                                    variant="outline-warning"
-                                    style={{
-                                        borderRadius: "10px",
-                                        padding: "6px",
-                                        width: "150px",
-                                        border: "2px solid",
-                                        fontWeight: "bold",
-                                        margin: "5px",
-                                    }}
-                                >
-                                    Edit Profile
-                </Button>
-                            </Link>
-                        </div>
-
-                        <div className="rightLink">
-                            <Link to={`/user/${user.userId}/delete`}>
-                                <Button
-                                    variant="danger"
-                                    style={{
-                                        borderRadius: "10px",
-                                        padding: "6px",
-                                        width: "150px",
-                                        border: "2px solid red",
-                                        margin: "5px",
-                                    }}
-                                >
-                                    Delete Account
-                </Button>
-                            </Link>
                         </div>
                     </div>
-                </div>
-            )
+                </div>)
                 : (
                     <Redirect to={"/restricted"} />
                 )

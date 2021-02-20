@@ -9,7 +9,7 @@
     "start": "node server.js",
     "install-client": "cd client-react && npm install",
     "build": "cd client-react && npm run build",
-    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false      npm run install-client && cp fix/react-cache.development.js client-react/node_modules/react-cache/cjs/ && npm run build"
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false      npm run install-client && cp -r fix/react-cache/ client-react/node_modules/ && npm run build"
   },
   "repository": {
     "type": "git",

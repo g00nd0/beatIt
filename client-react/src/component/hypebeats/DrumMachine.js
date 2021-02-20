@@ -15,7 +15,7 @@ import TitleField from './TitleField';
 const jwt = require("jsonwebtoken");
 
 const Container = styled.div`
-  max-width: 800px;
+  width: 800px;
   margin: auto;
   background: linear-gradient(to bottom right, #222, #0a0a0a);
   border: 2px solid black;

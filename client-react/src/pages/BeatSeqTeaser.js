@@ -28,7 +28,10 @@ const BeatSeqTeaser = () => {
 
     return (
         <div>
-            <h1>Beat Sequencer (Teaser)</h1>
+            <div class="form-h1">
+                <h1>Teaser</h1>
+            </div>
+
             <div>
                 <DrumMachine oneBeatSeq={{ _id: "", beatGrid: initialStepState, name: "Untitled", tempo: 65 }}
 

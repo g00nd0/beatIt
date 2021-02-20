@@ -70,8 +70,8 @@ const Login = (props) => {
   }
 
   const keyWidth = 2;
-  const valueWidth = 5;
-  const buffer = 1;
+  const valueWidth = 6;
+  const buffer = 2;
 
   const message = () => {
     if (errorMsg) {
@@ -86,17 +86,18 @@ const Login = (props) => {
 
 
   return (
-    <div className="login">
-      <div className="title">
+    <div className="form-box">
+      <div class="form-h1">
         <h1>Log In</h1>
       </div>
-      <div className="loginForm">
+
+      <div class="detailform-cont">
 
         <Form onSubmit={handleLogin}>
           <FormGroup as={Row} controlId="username">
             <Col sm={buffer} />
             <FormLabel column sm={keyWidth}>
-              Username:
+              <span class="font-weight-bold">Username : </span>
             </FormLabel>
             <Col sm={valueWidth}>
               <FormControl
@@ -115,7 +116,7 @@ const Login = (props) => {
           <FormGroup as={Row} controlId="password">
             <Col sm={buffer} />
             <FormLabel column sm={keyWidth}>
-              Password:{" "}
+              <span class="font-weight-bold">Password : </span>
             </FormLabel>
             <Col sm={valueWidth}>
               <FormControl

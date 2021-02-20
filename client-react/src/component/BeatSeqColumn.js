@@ -79,22 +79,25 @@ const BeatSeqColumn = (props) => {
   }, [machineCreated]);
 
   return (
-    <div id="beatSeqCol">
-      <div id="beatSeqList-overflow">
-        {/* beatSeqColumn */}
-        <BeatSeqList
-          newMachineCreated={machineCreated}
-          nameChange={props.nameChange}
-          saved={props.saved}
-          user={user}
-        />
-      </div>
+    <div class="container-fluid d-flex justify-content-center" id="beatSeqCol " >
+      <div id="beatSeqCol-cont" class="col-9 p-0">
 
-      <div class="d-flex justify-content-center">
-        <button onClick={() => handleAddMachineClick()}>
-          {" "}
+        <div class="beatSeqList-overflow " id="style-2">
+          {/* beatSeqColumn */}
+          <BeatSeqList
+            newMachineCreated={machineCreated}
+            nameChange={props.nameChange}
+            saved={props.saved}
+            user={user}
+          />
+        </div>
+
+        <div class="d-flex justify-content-center pt-2 align-middle">
+          <button onClick={() => handleAddMachineClick()}>
+            {" "}
           Add a sequence <AddBox />
-        </button>
+          </button>
+        </div>
       </div>
     </div>
   );

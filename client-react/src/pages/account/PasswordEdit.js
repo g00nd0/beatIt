@@ -21,7 +21,7 @@ const PasswordEdit = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault();
-        setChangeStatus("Hang on, changing your password...");
+        // setChangeStatus("Hang on, changing your password...");
         setErrorMsg()
         if (formData.password === formData.password2) {
             axios.put(`/api/user/${user.userId}`, { password: formData.password })
@@ -44,7 +44,7 @@ const PasswordEdit = () => {
     const showErrors = () => {
         let errors = [];
         if (errorMsg) {
-            errors.push(<p>Error!</p>);
+            errors.push(<p class="font-weight-bold">Error!</p>);
             for (let i = 0; i < errorMsg.length; i++) {
                 errors.push(<p>{errorMsg[i].msg}</p>);
             }
@@ -56,28 +56,24 @@ const PasswordEdit = () => {
         return <Redirect to={`/user/${userIdParam}`} />
     }
 
-    const keyWidth = 3
-    const valueWidth = 5
-    const buffer = 1
+    const keyWidth = 2
+    const valueWidth = 6
+    const buffer = 2
 
     return (
         <>
             {user.userId === userIdParam ?
-                <>
-                    <div>
+                <div class="form-box">
+                    <div class="form-h1">
                         <h1>Change Password</h1>
-                        <Row>
-                            <Col sm={buffer} />
-                            {changeStatus === "Password updated! Redirecting..." ? <Alert variant="success">{changeStatus}</Alert> : ""}
-                            {changeStatus === "Hang on, changing your password..." ? <Alert variant="info">{changeStatus}</Alert> : ""}
-                            {errorMsg ? <Alert variant="danger">{showErrors()}</Alert> : ""}
-                        </Row>
+                    </div>
+                    <div class="detailform-cont">
                         <Form onSubmit={handleSubmit}>
                             <FormGroup as={Row} controlId="newpassword1">
                                 <Col sm={buffer} />
                                 <FormLabel column sm={keyWidth}>
-                                    Enter New Password:
-                                        </FormLabel>
+                                    <span class="font-weight-bold">Enter New Password: </span>
+                                </FormLabel>
                                 <Col sm={valueWidth}>
                                     <FormControl
                                         type="password"
@@ -96,8 +92,7 @@ const PasswordEdit = () => {
 
                             <FormGroup as={Row} controlId="password2">
                                 <Col sm={buffer} />
-                                <FormLabel column sm={keyWidth}>
-                                    Re-Enter New Password:{" "}
+                                <FormLabel column sm={keyWidth}><span class="font-weight-bold">Re-Enter New Password: </span>
                                 </FormLabel>
                                 <Col sm={valueWidth}>
                                     <FormControl
@@ -114,39 +109,32 @@ const PasswordEdit = () => {
 
                             <Row>
                                 <Col sm={buffer} />
+                                <Col sm={valueWidth + 1} >
+                                    {changeStatus === "Password updated! Redirecting..." ? <Alert variant="success">{changeStatus}</Alert> : ""}
+                                    {changeStatus === "Hang on, changing your password..." ? <Alert variant="secondary">{changeStatus}</Alert> : ""}
+                                    {errorMsg ? <Alert variant="danger">{showErrors()}</Alert> : ""}
+                                </ Col>
                                 <Button
-                                    variant="warning"
+                                    variant="primary"
                                     style={{
                                         borderRadius: "10px",
-                                        border: "3px solid",
+                                        // border: "3px solid",
                                         fontWeight: "bold",
-                                        // width: "150px",
+                                        height: "50px",
                                     }}
                                     type="submit"
                                 >
                                     Save Password
                                 </Button>
-                                <Col sm="1" />
-
-                                <Col>
-                                    <Link to={`/user/${user.userId}`}>
-                                        <Button
-                                            variant="outline-warning"
-                                            style={{
-                                                borderRadius: "10px",
-                                                border: "3px solid",
-                                                fontWeight: "bold",
-                                                // width: "150px",
-                                            }}
-                                        >
-                                            Back to Account Details
-                                        </Button>
-                                    </Link>
-                                </Col>
                             </Row>
                         </Form>
+
+                        <Row>
+
+                        </Row>
+
                     </div>
-                </>
+                </div>
                 :
                 <Redirect to={"/restricted"} />
             }
