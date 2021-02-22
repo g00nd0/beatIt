@@ -9,7 +9,7 @@ Mitch, Gloria
 
 ## Working App
 
-[Click here!](https://sei26-project4.herokuapp.com/)
+[Click here!](https://project-beatit.herokuapp.com/)
 
 ## Technologies used:
 
