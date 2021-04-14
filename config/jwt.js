@@ -1,4 +1,3 @@
-// var jwt = require("express-jwt");
 var jwt = require("jsonwebtoken");
 
 const getJWTSecret = () => {
