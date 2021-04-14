@@ -44,14 +44,12 @@ const BeatSeqColumn = (props) => {
       //log in
       //add new machine with tempbeatseq
       const newMachineUser = {
-        // username: user.username
         ...tempbeatseq,
         userId: user.userId,
       };
       axios
         .post("/api/beatSequence", newMachineUser)
         .then((response) => {
-          //remove localStorage
           localStorage.removeItem("tempbeatseq");
           setNewMachineId(response.data._id);
           setMachineCreated(true);
@@ -72,7 +70,6 @@ const BeatSeqColumn = (props) => {
     <div class="container-fluid d-flex justify-content-center" id="beatSeqCol ">
       <div id="beatSeqCol-cont" class="col-9 p-0">
         <div class="beatSeqList-overflow " id="style-2">
-          {/* beatSeqColumn */}
           <BeatSeqList
             newMachineCreated={machineCreated}
             nameChange={props.nameChange}

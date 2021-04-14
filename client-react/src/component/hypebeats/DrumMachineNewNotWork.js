@@ -2,7 +2,6 @@ import React, { useState, useEffect, useRef } from "react";
 import styled from "styled-components";
 import Tone from "tone";
 import axios from "axios";
-
 import useBPM from "./useBPM";
 import useStart from "./useStart";
 import StepContext from "./StepContext";
@@ -50,13 +49,6 @@ const config = {
     Clap: "/sounds/clap.wav",
     HiHat: "/sounds/hat2.wav",
     OpenHiHat: "/sounds/openhihat.wav",
-    // Kick: process.env.PUBLIC_URL + "/sounds/kick.wav",
-    // Sub1: process.env.PUBLIC_URL + "/sounds/bass.wav",
-    // Sub2: process.env.PUBLIC_URL + "/sounds/sub.wav",
-    // Snare: process.env.PUBLIC_URL + "/sounds/snare.wav",
-    // Clap: process.env.PUBLIC_URL + "/sounds/clap.wav",
-    // HiHat: process.env.PUBLIC_URL + "/sounds/hat2.wav",
-    // OpenHiHat: process.env.PUBLIC_URL + "/sounds/openhihat.wav",
   },
 };
 
@@ -80,8 +72,6 @@ export default function DrumMachine(props) {
   const [start, startButton] = useStart();
   const [bpm, bpmSelector] = useBPM(65);
 
-  // const userId = localStorage.getItem('userId')
-
   const buffersRef = useRef(buffers);
   buffersRef.current = buffers;
   const stepsRef = useRef(stepState);
@@ -89,51 +79,11 @@ export default function DrumMachine(props) {
   const currentStepRef = useRef(currentStep);
   currentStepRef.current = currentStep;
 
-  // useEffect(() => {
-  //   axios.get("/api/instrument").then((response) => {
-  //     console.log(response.data);
-
-  //     const currentConfig = newConfig;
-
-  //     // currentConfig.samples.
-
-  //     // for (const property in currentConfig.samples) {
-  //     //   currentConfig.samples[property] =
-  //     // }
-
-  //     // response.data.forEach(() => {
-  //     //   currentConfig.samples.
-  //     // })
-
-  //     currentConfig.samples.Kick = response.data[0].soundFile;
-  //     currentConfig.samples.Sub1 = response.data[1].soundFile;
-  //     currentConfig.samples.Sub2 = response.data[2].soundFile;
-  //     currentConfig.samples.Snare = response.data[3].soundFile;
-  //     currentConfig.samples.Clap = response.data[4].soundFile;
-  //     currentConfig.samples.HiHat = response.data[5].soundFile;
-  //     currentConfig.samples.OpenHiHat = response.data[6].soundFile;
-
-  //     setNewConfig(currentConfig);
-  //   });
-  // }, [newConfig]);
-
   useEffect(
     //steps
     () => {
       axios.get("/api/instrument").then((response) => {
-        console.log(response.data);
-
         const currentConfig = newConfig;
-
-        // currentConfig.samples.
-
-        // for (const property in currentConfig.samples) {
-        //   currentConfig.samples[property] =
-        // }
-
-        // response.data.forEach(() => {
-        //   currentConfig.samples.
-        // })
 
         currentConfig.samples.Kick = response.data[0].soundFile;
         currentConfig.samples.Sub1 = response.data[1].soundFile;
@@ -198,9 +148,6 @@ export default function DrumMachine(props) {
       tempo: bpm,
       beatGrid: stepState,
       username: "to remove this username field. use id",
-      //remove if using mongdo
-      // status: "active",
-      // UpdatedAt: "2021-04-02" //todays'date
     };
     console.log("beatSetUp", beatSetUp);
     axios
@@ -209,10 +156,8 @@ export default function DrumMachine(props) {
         console.log("posted to MongoDB", response);
       })
       .catch((error) => {
-        console.log("error", error);
         console.log("error response", error.response.data.error);
       });
-    console.log("after axios");
     //also need newplaylist name to appear in the list
   };
 
@@ -233,10 +178,6 @@ export default function DrumMachine(props) {
             setBuffers={setBuffers}
           />
           <ButtonContainer>
-            {/* <Fx sound="sounds/loop.wav" title="Turn Up (F)" />
-            <Fx sound="sounds/loop130.wav" title="SQUAD (Am)" />
-            <Fx sound="sounds/hey.wav" title="Hey" />
-            <Fx sound="sounds/yeah.wav" title="Yeah" /> */}
             <Fx
               sound={process.env.PUBLIC_URL + "/sounds/loop.wav"}
               title="Turn Up (F)"

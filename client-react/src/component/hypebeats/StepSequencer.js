@@ -1,8 +1,8 @@
-import React from 'react';
-import styled from 'styled-components';
-import { bufferResource } from './bufferResource';
+import React from "react";
+import styled from "styled-components";
+import { bufferResource } from "./bufferResource";
 
-import Track from './Track';
+import Track from "./Track";
 
 const Wrapper = styled.div`
   display: flex;
@@ -13,7 +13,6 @@ const Wrapper = styled.div`
   position: relative;
 `;
 
-//  width: 600px;
 const IndicatorWrapper = styled.div`
   position: absolute;
   width: 600px;
@@ -27,7 +26,7 @@ const IndicatorWrapper = styled.div`
 const StepIndicator = styled.div`
   position: absolute;
   top: 0px;
-  left: ${props => props.step * 37.5}px;
+  left: ${(props) => props.step * 37.5}px;
   width: 38px;
   height: 100%;
   background: #00ff0020;
@@ -44,7 +43,7 @@ export default function StepSequencer({
       <IndicatorWrapper>
         {playing && <StepIndicator step={currentStep} />}
       </IndicatorWrapper>
-      {config.tracks.map(t => (
+      {config.tracks.map((t) => (
         <Track
           name={t}
           key={t}

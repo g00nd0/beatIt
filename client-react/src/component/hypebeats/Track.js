@@ -29,7 +29,6 @@ export default function Track({ buffer, name, setBuffers }) {
   const context = useContext(StepContext);
   const clearRow = () => {
     console.log("clearing row for", name);
-    // console.log("context.state", context.state)
     const currentState = context.state;
     const cleanRow = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0];
     const newState = {
