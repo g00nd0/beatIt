@@ -6,12 +6,10 @@ import {
   FormLabel,
   FormControl,
   FormGroup,
-  FormText,
   Row,
   Col,
   Alert,
 } from "react-bootstrap";
-// import 'bootstrap/dist/css/bootstrap.min.css';
 import { Redirect } from "react-router-dom";
 const jwt = require("jsonwebtoken");
 
@@ -25,15 +23,12 @@ const Login = (props) => {
   const [loginStatus, setLoginStatus] = useState(false); //to redirect to /beatseq
   const [status, setStatus] = useState(""); //inform user that logging in
 
-  // const secret = process.env.JWT_SECRET_KEY;
-
   const handleLogin = (event) => {
     event.preventDefault();
-    setErrorMsg("")
+    setErrorMsg("");
     axios
       .post("/api/session", formData, { withCredentials: true }) //get token
       .then((response) => {
-        console.log("response.data", response.data);
         if (response.data.token) {
           //set token to localStorage
           const token = response.data.token;
@@ -45,7 +40,6 @@ const Login = (props) => {
           }; //useState or if statement?
           setStatus("logging in"); //re-render
           props.setUser(user);
-          console.log("logging in");
           setTimeout(() => {
             setLoginStatus(true);
           }, 800);
@@ -54,13 +48,17 @@ const Login = (props) => {
       .catch((error) => {
         //handling error not working
         setStatus("");
-        // setErrorMsg(error.error);
         if (error.response.data.error === undefined) {
-          setErrorMsg(error.response.statusText)
+          setErrorMsg(error.response.statusText);
         } else {
-          setErrorMsg(error.response.statusText + ", " + error.response.data.error);
+          setErrorMsg(
+            error.response.statusText + ", " + error.response.data.error
+          );
         } // custom message from backend
-        console.log("error from posting session error.response", error.response);
+        console.log(
+          "error from posting session error.response",
+          error.response
+        );
       });
   };
 
@@ -75,15 +73,23 @@ const Login = (props) => {
 
   const message = () => {
     if (errorMsg) {
-      console.log(errorMsg)
-      return < Alert variant="danger" > <span class="font-weight-bold">Oh no! </span>{errorMsg}</Alert >
+      return (
+        <Alert variant="danger">
+          {" "}
+          <span class="font-weight-bold">Oh no! </span>
+          {errorMsg}
+        </Alert>
+      );
     } else if (status === "logging in") {
-      return <Alert variant="success"><span class="font-weight-bold">Success : </span>Get ready to dope!</Alert>
+      return (
+        <Alert variant="success">
+          <span class="font-weight-bold">Success : </span>Get ready to dope!
+        </Alert>
+      );
     } else {
-      return <span />
+      return <span />;
     }
-  }
-
+  };
 
   return (
     <div className="form-box">
@@ -92,7 +98,6 @@ const Login = (props) => {
       </div>
 
       <div class="detailform-cont">
-
         <Form onSubmit={handleLogin}>
           <FormGroup as={Row} controlId="username">
             <Col sm={buffer} />
@@ -104,7 +109,6 @@ const Login = (props) => {
                 type="text"
                 value={formData.username}
                 onChange={(event) => {
-                  // console.log(event.target)
                   setFormData((state) => {
                     return { ...state, username: event.target.value };
                   });
@@ -131,7 +135,6 @@ const Login = (props) => {
             </Col>
           </FormGroup>
           <Row>
-
             <Col sm={buffer} />
             <Col sm={valueWidth + 1}>{message()}</Col>
             <Col sm={keyWidth - 1}>
