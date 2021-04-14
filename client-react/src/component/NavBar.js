@@ -3,12 +3,8 @@ import { Navbar, Nav, Button, Col, NavDropdown } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import { AccountCircle, ExitToApp } from "@material-ui/icons";
 import "../App.css";
-// import "bootstrap/dist/css/bootstrap.min.css";
-// import { StatusProvider, useUser, useDispatch } from "./context/Context";
 
 const NavBar = ({ user }) => {
-  // {userId, userName}
-
   const loggedIn = user.userId === undefined ? false : true;
 
   return (
@@ -29,14 +25,12 @@ const NavBar = ({ user }) => {
         BeatIT!
       </Navbar.Brand>
       <Navbar.Toggle aria-controls="basic-navbar-nav" />
-      {/* <Navbar.Collapse id="basic-navbar-nav"> */}
       <Nav className="mr-auto" id="navBar-left">
         {loggedIn ? (
           <Nav.Link as={Link} to="/beatseq">
             Beat Sequencer
           </Nav.Link>
         ) : (
-          // <Nav.Link onTouchCancel="/teaser">Teaser</Nav.Link>
           <Nav.Link as={Link} to="/teaser">
             Teaser
           </Nav.Link>
@@ -46,8 +40,6 @@ const NavBar = ({ user }) => {
           Info
         </Nav.Link>
       </Nav>
-
-      {/* {loggedIn ? (<Navbar.Text><span id="welcome-name">Welcome {user.username}</span></Navbar.Text>) : ""} */}
 
       {loggedIn ? (
         <Nav className="ml-auto" id="navBar-right-account">
@@ -88,8 +80,6 @@ const NavBar = ({ user }) => {
           </Nav.Link>
         </Nav>
       )}
-
-      {/* </Navbar.Collapse> */}
     </Navbar>
   );
 };

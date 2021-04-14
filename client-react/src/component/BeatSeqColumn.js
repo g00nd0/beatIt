@@ -16,9 +16,7 @@ const BeatSeqColumn = (props) => {
 
   const handleAddMachineClick = () => {
     setMachineCreated(false); //so that can add again
-    console.log("add new machine");
     const newMachineUser = {
-      // username: user.username
       userId: user.userId,
     };
 
@@ -32,7 +30,6 @@ const BeatSeqColumn = (props) => {
       })
       .catch((error) => {
         console.log("add new machine error/error", error);
-        // console.log("add new machine error/response", error.response.data.error);
       });
   };
 
@@ -56,17 +53,11 @@ const BeatSeqColumn = (props) => {
         .then((response) => {
           //remove localStorage
           localStorage.removeItem("tempbeatseq");
-          console.log(
-            "posted a new machine to MongoDB from localStorage",
-            response
-          );
-          //get the new object_id
           setNewMachineId(response.data._id);
           setMachineCreated(true);
         })
         .catch((error) => {
           console.log("add new machine error/error", error);
-          // console.log("add new machine error/response", error.response.data.error);
         });
     }
   }); // runs once
@@ -75,13 +66,11 @@ const BeatSeqColumn = (props) => {
     if (machineCreated === true) {
       return history.push(`/beatseq/${newMachineId}`);
     }
-    // setMachineCreated(false);
   }, [machineCreated]);
 
   return (
-    <div class="container-fluid d-flex justify-content-center" id="beatSeqCol " >
+    <div class="container-fluid d-flex justify-content-center" id="beatSeqCol ">
       <div id="beatSeqCol-cont" class="col-9 p-0">
-
         <div class="beatSeqList-overflow " id="style-2">
           {/* beatSeqColumn */}
           <BeatSeqList
@@ -95,7 +84,7 @@ const BeatSeqColumn = (props) => {
         <div class="d-flex justify-content-center pt-2 align-middle">
           <button onClick={() => handleAddMachineClick()}>
             {" "}
-          Add a sequence <AddBox />
+            Add a sequence <AddBox />
           </button>
         </div>
       </div>
