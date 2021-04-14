@@ -22,16 +22,13 @@ const jwt = require("jsonwebtoken");
 
 function App() {
   const [user, setUser] = useState({});
-  // const [token, setToken] = useState("")
-  console.log("user at App", user);
-
   const token = localStorage.getItem("token");
   useEffect(() => {
     if (token !== null) {
       const decoded = jwt.verify(token, "sei-26"); //cant read secret :/
-      setUser({ userId: decoded.user._id, username: decoded.user.username })
+      setUser({ userId: decoded.user._id, username: decoded.user.username });
     }
-  }, [user.userId])
+  }, [user.userId]);
 
   return (
     <div class="container-fluid px-0" id="overall-app-cont">
@@ -45,41 +42,81 @@ function App() {
             <h1>You are not authorised to visit this page.</h1>
           </Route>
           <Route exact path="/beatseq">
-            {user.userId === undefined ? <Redirect to={"/login"} /> : <BeatSeq />}
+            {user.userId === undefined ? (
+              <Redirect to={"/login"} />
+            ) : (
+              <BeatSeq />
+            )}
           </Route>
           <Route path="/beatseq/:id">
-            {user.userId === undefined ? <Redirect to={"/login"} /> : <BeatSeq />}
+            {user.userId === undefined ? (
+              <Redirect to={"/login"} />
+            ) : (
+              <BeatSeq />
+            )}
           </Route>
           <Route exact path="/teaser">
-            {user.userId === undefined ? <BeatSeqTeaser /> : <Redirect to={"/beatseq"} />}
+            {user.userId === undefined ? (
+              <BeatSeqTeaser />
+            ) : (
+              <Redirect to={"/beatseq"} />
+            )}
           </Route>
           <Route exact path="/login">
-            {user.userId === undefined ? <Login setUser={setUser} /> : <Redirect to={"/beatseq"} />}
+            {user.userId === undefined ? (
+              <Login setUser={setUser} />
+            ) : (
+              <Redirect to={"/beatseq"} />
+            )}
           </Route>
           <Route exact path="/user/new">
-            {user.userId === undefined ? <SignUp setUser={setUser} /> : <Redirect to={`/user/${user.userId}`} />}
+            {user.userId === undefined ? (
+              <SignUp setUser={setUser} />
+            ) : (
+              <Redirect to={`/user/${user.userId}`} />
+            )}
           </Route>
           <Route exact path="/user/:id">
-            {user.userId === undefined ? <Redirect to={"/login"} /> : <AccountView />}
+            {user.userId === undefined ? (
+              <Redirect to={"/login"} />
+            ) : (
+              <AccountView />
+            )}
           </Route>
           <Route exact path="/user/:id/edit">
-            {user.userId === undefined ? <Redirect to={"/login"} /> : <AccountEdit />}
+            {user.userId === undefined ? (
+              <Redirect to={"/login"} />
+            ) : (
+              <AccountEdit />
+            )}
           </Route>
           <Route exact path="/user/:id/changepassword">
-            {user.userId === undefined ? <Redirect to={"/login"} /> : <PasswordEdit />}
+            {user.userId === undefined ? (
+              <Redirect to={"/login"} />
+            ) : (
+              <PasswordEdit />
+            )}
           </Route>
           <Route exact path="/user/:id/delete">
-            {user.userId === undefined ? <Redirect to={"/login"} /> : <DeleteAccount user={user} setUser={setUser} />}
+            {user.userId === undefined ? (
+              <Redirect to={"/login"} />
+            ) : (
+              <DeleteAccount user={user} setUser={setUser} />
+            )}
           </Route>
           <Route exact path="/logout">
-            {user.userId === undefined ? <Redirect to={"/login"} /> : <Logout user={user} setUser={setUser} />}
+            {user.userId === undefined ? (
+              <Redirect to={"/login"} />
+            ) : (
+              <Logout user={user} setUser={setUser} />
+            )}
           </Route>
           <Route exact path="/info">
             <Info />
           </Route>
         </Switch>
       </Router>
-    </div >
+    </div>
   );
 }
 export default App;
