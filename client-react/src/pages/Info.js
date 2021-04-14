@@ -1,5 +1,4 @@
 import React from "react";
-// import DrumMachine from "../component/hypebeats/DrumMachine";
 import { VolumeUp, Backspace } from "@material-ui/icons";
 import { makeStyles } from "@material-ui/core/styles";
 import Popover from "@material-ui/core/Popover";
@@ -16,8 +15,6 @@ const useStyles = makeStyles((theme) => ({
 }));
 
 const Info = () => {
-  //   const disabled = false;
-
   const classes = useStyles();
   const [anchorEl, setAnchorEl] = React.useState(null);
   const [popNum, setPopNum] = React.useState(-1);

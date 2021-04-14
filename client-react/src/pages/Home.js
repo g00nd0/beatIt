@@ -1,4 +1,3 @@
-// import React from 'react'
 const Home = () => {
   return (
     <div className="homeText">
@@ -10,12 +9,6 @@ const Home = () => {
         </p>
       </div>
       <div className="demoGif" />
-      {/* <img
-        src="/img/beatSeq.gif"
-        alt="Girl in a jacket"
-        width="500"
-        height="600"
-      /> */}
       <div>
         Icons made by
         <a href="https://www.freepik.com" title="Freepik">
