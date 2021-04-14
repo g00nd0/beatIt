@@ -16,27 +16,24 @@ router.get("/seed", (req, res) => {
       console.log(error);
       return res.send({ ...error, message: "likely user already exist" });
     }
-    console.log("users", user);
     res.redirect("/api/user");
   });
 });
 
 // INDEX (show all users - admin access only) & also to check for existing username
 router.get("/", (req, res) => {
-  if (req.query.username) { //if there is a query, check if it exist
-    console.log("req.query.username", req.query.username);
+  if (req.query.username) {
+    //if there is a query, check if it exist
     User.find({ username: req.query.username }, (error, oneUser) => {
       if (error) {
         res.status(StatusCodes.BAD_REQUEST).send(error);
-      } else { //user exist
-        // console.log(oneUser) //[{username:...,}]
-        const userObj = oneUser[0]
-        // console.log(userObj)
+      } else {
+        //user exist
+        const userObj = oneUser[0];
         const userNoPw = { ...userObj, password: "" }; //do not return password
         res.status(StatusCodes.OK).send(userNoPw);
-        // console.log(userNoPw)
       }
-    }).lean()
+    }).lean();
   } else {
     User.find({}, (error, users) => {
       if (error) {
@@ -47,19 +44,6 @@ router.get("/", (req, res) => {
     });
   }
 });
-
-// router.get("/:id", (req, res) => {
-//   //if there is a query, check if it exist
-//   //   console.log("req.query.username", req.query.username);
-//   User.findById(req.params.id, (error, oneUser) => {
-//     if (error) {
-//       res.status(StatusCodes.BAD_REQUEST).send(error);
-//     } else {
-//       //user exist
-//       res.status(StatusCodes.OK).send(oneUser);
-//     }
-//   });
-// });
 
 router.get("/:id", (req, res) => {
   User.findById(req.params.id, (error, oneUser) => {
@@ -78,8 +62,15 @@ router.post(
   body("username", "Username has to be at least 6 characters long.")
     .trim()
     .isLength({ min: 6 }),
-  body("password", "Password has to be at least 8 alphanumeric characters long.")
-    .trim().isLength({ min: 8 }).bail().isAlphanumeric().bail(),
+  body(
+    "password",
+    "Password has to be at least 8 alphanumeric characters long."
+  )
+    .trim()
+    .isLength({ min: 8 })
+    .bail()
+    .isAlphanumeric()
+    .bail(),
   body("name", "Please enter your name.").trim().notEmpty(),
   body("email", "Please enter a valid email address.").isEmail(),
   (req, res) => {
@@ -91,7 +82,6 @@ router.post(
     } else {
       //!! check if username already exist, if so, return error message
       //Data is valid
-      console.log(req.body);
       //overwrite the user password with the hashed password, then pass that in to our database
       req.body.password = bcrypt.hashSync(
         req.body.password,
@@ -104,21 +94,9 @@ router.post(
           res.send(error);
         } else {
           res.send(user);
-          console.log("submitted");
           return user;
         }
       });
-
-      // User.create(req.body, (err, createdUser) => {
-      //   if (err) {
-      //     res.status(StatusCodes.BAD_REQUEST).send(err);
-      //   } else {
-      //     console.log("user is created");
-      //     req.session.currentUser = createdUser;
-      //     //req.session creates a session, we are also creating a field called currentUser = createdUser
-      //     res.status(StatusCodes.CREATED).send(createdUser);
-      //   }
-      // });
     }
   }
 );
@@ -130,7 +108,10 @@ router.put(
     .optional()
     .trim()
     .isLength({ min: 6 }),
-  body("password", "Password has to be at least 8 alphanumeric characters long.")
+  body(
+    "password",
+    "Password has to be at least 8 alphanumeric characters long."
+  )
     .optional()
     .trim()
     .isLength({ min: 8 })
@@ -176,7 +157,6 @@ router.put("/:id/sdelete", (req, res) => {
   User.findById(req.params.id, (err, user) => {
     if (err) {
       res.send(err);
-      console.log("error occurred " + err);
     } else {
       user.status = "Inactive";
       user.save((er) => {
@@ -186,7 +166,6 @@ router.put("/:id/sdelete", (req, res) => {
           res.send(user);
         }
       });
-      console.log("soft delete");
     }
   });
 });

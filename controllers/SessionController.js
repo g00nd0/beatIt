@@ -15,25 +15,15 @@ sessions.get("/", (req, res) => {
   }
 });
 
-// sessions.get("/", (req, res) => { //if equals to sessionsStorage
-//   if (req.session.currentUser._id === req.body.userId) {
-//     res.status(StatusCodes.OK).send("Session found. User is logged in!");
-//   } else {
-//     res.status(StatusCodes.FORBIDDEN).send({ error: "You are not authorized to view this page." });
-//   }
-// });
-
 //TO ADD ON, if user is inactive/deleted, should not be able to log in
 // POST on log-in /session
 sessions.post("/", (req, res) => {
   User.findOne({ username: req.body.username }, (err, foundUser) => {
     if (err) {
-      console.log(err);
       res
         .status(500)
         .send({ error: "Oops there's a problem with the server database" });
     } else if (!foundUser) {
-      // res.status(401).send({ error: "Sorry, no user found" });
       res.status(401).send({ error: `Sorry, no user found` });
     } else {
       //no error with server database and found user in database
@@ -44,7 +34,6 @@ sessions.post("/", (req, res) => {
           req.session.currentUser = foundUser;
           res.status(200).send(foundUser);
         } else {
-          // res.status(401).send({ error: "Password doesn't match" });
           res.status(401).send({ error: `Password does not match` });
         }
       } else {
